@@ -33,7 +33,7 @@
 };
 
 
-  # networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "nix"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
@@ -72,10 +72,10 @@
 
   # Intel drivers
   services.xserver.videoDrivers = [ "intel" ];
-services.xserver.deviceSection = ''
+  services.xserver.deviceSection = ''
   Option "DRI" "2"
   Option "TearFree" "true"
-'';
+  '';
   # Themes
   qt.enable = true;
   qt.platformTheme = "gtk2";
@@ -135,13 +135,6 @@ services.xserver.deviceSection = ''
     })
      (final: prev: {
       dwmblocks = prev.dwmblocks.overrideAttrs (old: { src = /home/mahdi/.local/src/dwmblocks ;});
-      })
-     (final: prev: {
-      st = prev.st.overrideAttrs (old: { src = /home/mahdi/.local/src/st ;
-             buildInputs = old.buildInputs ++ [
-                   pkgs.harfbuzz
-            ];
-});
       })
   ];
   # services.xserver.windowManager.dwm.enable = true;
@@ -223,7 +216,6 @@ services.xserver.deviceSection = ''
     neovim
     pkg-config
     picom
-    # st
     dwm
     dmenu
     dwmblocks
